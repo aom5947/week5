@@ -1,0 +1,33 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f8f8f8;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+/* Container for the app */
+.container {
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 400px;
+}
+
+/* Header */
+h1 {
+    color: #4CAF50;
+    margin-bottom: 20px;
+    font-size: 24px;
+}
+
+/* Section headers */
+h2, h3 {
+    color: #333;
+    font-size: 20px;
+    margin-top: 10px;
+}
