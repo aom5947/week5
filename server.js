@@ -31,3 +31,33 @@ app.post("/login", (req, res) => {
     res.json({ success: false, message: "Invalid username or password" });
   }
 });
+// Upload file
+app.post("/upload", upload.single("file"), (req, res) => {
+  if (!req.file) return res.status(400).send("No file uploaded.");
+  res.json({ success: true, filename: req.file.filename });
+});
+
+// Get file list
+app.get("/files", (req, res) => {
+  fs.readdir("uploads", (err, files) => {
+    if (err) return res.status(500).send("Error reading files");
+    res.json(files);
+  });
+});
+
+// Download file
+app.get("/download/:filename", (req, res) => {
+  const file = path.join(__dirname, "uploads", req.params.filename);
+  res.download(file);
+});
+
+// Delete file
+app.delete("/delete/:filename", (req, res) => {
+  const filePath = path.join("uploads", req.params.filename);
+  fs.unlink(filePath, (err) => {
+    if (err) return res.status(500).send("File not found");
+    res.json({ success: true, message: "File deleted" });
+  });
+});
+
+app.listen(3000, () => console.log("Server running on port 3000"));
