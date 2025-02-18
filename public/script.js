@@ -49,3 +49,37 @@ function uploadFile() {
     })
     .catch(error => console.error("Error uploading file:", error));
 }
+
+function fetchFiles() {
+    fetch("http://localhost:3000/files")
+    .then(response => response.json())
+    .then(files => {
+        const fileList = document.getElementById("fileList");
+        fileList.innerHTML = ""; // ล้างรายการไฟล์ที่เก่าออก
+        files.forEach(file => {
+            const li = document.createElement("li");
+            li.innerHTML = ${file} 
+                <button onclick="downloadFile('${file}')">Download</button>
+                <button onclick="deleteFile('${file}')">Delete</button>;
+            fileList.appendChild(li);
+        });
+    });
+}
+
+function downloadFile(filename) {
+    window.location.href = http://localhost:3000/download/${filename};
+}
+
+function deleteFile(filename) {
+    if (confirm("Are you sure you want to delete this file?")) {
+        fetch(http://localhost:3000/delete/${filename}, { method: "DELETE" })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                alert("File deleted successfully");
+                fetchFiles(); // รีเฟรชรายชื่อไฟล์
+            }
+        })
+        .catch(error => console.error("Error deleting file:", error));
+}
+}
