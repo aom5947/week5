@@ -58,21 +58,21 @@ function fetchFiles() {
         fileList.innerHTML = ""; // ล้างรายการไฟล์ที่เก่าออก
         files.forEach(file => {
             const li = document.createElement("li");
-            li.innerHTML = ${file} 
+            li.innerHTML = `${file} 
                 <button onclick="downloadFile('${file}')">Download</button>
-                <button onclick="deleteFile('${file}')">Delete</button>;
+                <button onclick="deleteFile('${file}')">Delete</button>`;
             fileList.appendChild(li);
         });
     });
 }
 
 function downloadFile(filename) {
-    window.location.href = http://localhost:3000/download/${filename};
+    window.location.href = `http://localhost:3000/download/${filename}`;
 }
 
 function deleteFile(filename) {
     if (confirm("Are you sure you want to delete this file?")) {
-        fetch(http://localhost:3000/delete/${filename}, { method: "DELETE" })
+        fetch(`http://localhost:3000/delete/${filename}`, { method: "DELETE" })
         .then(response => response.json())
         .then(data => {
             if (data.success) {
