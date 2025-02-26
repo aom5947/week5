@@ -1,8 +1,8 @@
-import express from "express";
-import multer from "multer";
-import fs from "fs";
-import path from "path";
-import cors from "cors";
+const express = require("express");
+const multer = require("multer");
+const fs = require("fs");
+const path = require("path");
+const cors = require("cors");
 
 const app = express();
 
@@ -31,6 +31,7 @@ app.post("/login", (req, res) => {
     res.json({ success: false, message: "Invalid username or password" });
   }
 });
+
 // Upload file
 app.post("/upload", upload.single("file"), (req, res) => {
   if (!req.file) return res.status(400).send("No file uploaded.");
